@@ -81,7 +81,8 @@ export const SideNav = () => {
                 flexShrink: 0,
                 '& .MuiDrawer-paper': {
                     width: 240,
-                    boxSizing: 'border-box'
+                    boxSizing: 'border-box',
+                    backgroundColor: 'background.paper'
                 }
             }}
             variant="permanent"
