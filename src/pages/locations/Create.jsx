@@ -41,7 +41,7 @@ const initialValues = {
     ]
 };
 
-export const CreatePurchase = () => {
+export const CreateRFQ = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { allProducts } = useSelector((state) => state.products);
@@ -54,7 +54,7 @@ export const CreatePurchase = () => {
                         initialValues={initialValues}
                         onSubmit={(values) => {
                             dispatch(addNewRfq(values));
-                            navigate('/purchases');
+                            navigate('/rfqs');
                         }}
                     >
                         {({

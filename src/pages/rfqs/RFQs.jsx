@@ -7,9 +7,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { deleteRfqById } from '../../store/slices';
 
-export const Purchases = () => {
+export const RFQs = () => {
     const navigate = useNavigate();
-    const { allOrders } = useSelector((state) => state.orders);
+    const { allRfqs } = useSelector((state) => state.rfqs);
     const dispatch = useDispatch();
 
     const handleRfqDelete = (id) => {
@@ -18,20 +18,20 @@ export const Purchases = () => {
 
     const columns = [
         {
-            field: 'order_number',
+            field: 'rfq_number',
             headerName: 'RFQ Number',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'customer',
-            headerName: 'Customer',
+            field: 'supplier',
+            headerName: 'Supplier',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'order_date',
-            headerName: 'Order Date',
+            field: 'created_at',
+            headerName: 'Created Date',
             minWidth: 100,
             flex: 1
         },
@@ -48,7 +48,7 @@ export const Purchases = () => {
             flex: 1,
             renderCell: (params, row) => {
                 switch (params.value) {
-                    case 'Completed':
+                    case 'Confirmed':
                         return <Chip label={params.value} color="success" />;
                     case 'In Progress':
                         return <Chip label={params.value} color="warning" />;
@@ -68,9 +68,7 @@ export const Purchases = () => {
                 return (
                     <Stack direction="row" spacing={1}>
                         <IconButton
-                            onClick={() =>
-                                navigate(`/purchase-orders/${params.id}`)
-                            }
+                            onClick={() => navigate(`/rfqs/${params.id}`)}
                             aria-label="edit"
                             color="primary"
                         >
@@ -98,15 +96,15 @@ export const Purchases = () => {
                         onClick={() => navigate('/rfqs/create')}
                         disableElevation
                     >
-                        New Order
+                        New RFQ
                     </Button>
                 </Grid>
 
                 <Grid item>
                     <DataGridDemo
-                        rows={allOrders}
+                        rows={allRfqs}
                         columns={columns}
-                        getRowId={(row) => row.order_number}
+                        getRowId={(row) => row.rfq_number}
                     />
                 </Grid>
             </Grid>

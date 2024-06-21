@@ -28,8 +28,10 @@ export const navigations = [
         ]
     },
     { name: 'RFQs', path: '/rfqs', roles: [] },
-    { name: 'Orders', path: '/orders', roles: [] },
-    { name: 'Transport', path: '/transport', roles: [] },
-    { name: 'Acknowledge Orders', path: '/ack-orders', roles: [] },
+    { name: 'Purchases Orders', path: '/purchase-orders', roles: [] },
+    { name: 'Sales Orders', path: '/sales-orders', roles: [] },
+    { name: 'Bills', path: '/bills', roles: [] },
+    { name: 'Stocks', path: '/stocks', roles: [] },
+    { name: 'Transport', path: '/transports', roles: [] },
     { name: 'Reports', path: '/reports', roles: [] }
 ];

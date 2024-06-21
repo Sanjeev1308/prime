@@ -5,16 +5,20 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider } from 'react-router-dom';
 import { router } from './routes';
 import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = createTheme({});
 
 root.render(
     <React.StrictMode>
-        <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <RouterProvider router={router} />
-        </ThemeProvider>
+        <Provider store={store}>
+            <ThemeProvider theme={theme}>
+                <CssBaseline />
+                <RouterProvider router={router} />
+            </ThemeProvider>
+        </Provider>
     </React.StrictMode>
 );
 

@@ -7,9 +7,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { deleteRfqById } from '../../store/slices';
 
-export const Purchases = () => {
+export const Stocks = () => {
     const navigate = useNavigate();
-    const { allOrders } = useSelector((state) => state.orders);
+    const { allStocks } = useSelector((state) => state.stocks);
     const dispatch = useDispatch();
 
     const handleRfqDelete = (id) => {
@@ -18,46 +18,28 @@ export const Purchases = () => {
 
     const columns = [
         {
-            field: 'order_number',
-            headerName: 'RFQ Number',
+            field: 'product_name',
+            headerName: 'Product name',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'customer',
-            headerName: 'Customer',
+            field: 'quantity',
+            headerName: 'Quantity',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'order_date',
-            headerName: 'Order Date',
+            field: 'location',
+            headerName: 'Location',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'created_by',
-            headerName: 'Created By',
+            field: 'last_updated',
+            headerName: 'Last Updated',
             minWidth: 100,
             flex: 1
-        },
-        {
-            field: 'status',
-            headerName: 'Status',
-            minWidth: 100,
-            flex: 1,
-            renderCell: (params, row) => {
-                switch (params.value) {
-                    case 'Completed':
-                        return <Chip label={params.value} color="success" />;
-                    case 'In Progress':
-                        return <Chip label={params.value} color="warning" />;
-                    case 'Draft':
-                        return <Chip label={params.value} />;
-                    default:
-                        return <Chip label={params.value} />;
-                }
-            }
         },
         {
             field: 'action',
@@ -68,9 +50,7 @@ export const Purchases = () => {
                 return (
                     <Stack direction="row" spacing={1}>
                         <IconButton
-                            onClick={() =>
-                                navigate(`/purchase-orders/${params.id}`)
-                            }
+                            onClick={() => navigate(`/rfqs/${params.id}`)}
                             aria-label="edit"
                             color="primary"
                         >
@@ -98,15 +78,15 @@ export const Purchases = () => {
                         onClick={() => navigate('/rfqs/create')}
                         disableElevation
                     >
-                        New Order
+                        New Stock
                     </Button>
                 </Grid>
 
                 <Grid item>
                     <DataGridDemo
-                        rows={allOrders}
+                        rows={allStocks}
                         columns={columns}
-                        getRowId={(row) => row.order_number}
+                        getRowId={(row) => row.product_id}
                     />
                 </Grid>
             </Grid>

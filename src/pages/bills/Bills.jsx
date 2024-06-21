@@ -7,9 +7,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { deleteRfqById } from '../../store/slices';
 
-export const Purchases = () => {
+export const Bills = () => {
     const navigate = useNavigate();
-    const { allOrders } = useSelector((state) => state.orders);
+    const { allBills } = useSelector((state) => state.bills);
     const dispatch = useDispatch();
 
     const handleRfqDelete = (id) => {
@@ -18,39 +18,39 @@ export const Purchases = () => {
 
     const columns = [
         {
+            field: 'bill_number',
+            headerName: 'Bill Number',
+            minWidth: 100,
+            flex: 1
+        },
+        {
             field: 'order_number',
-            headerName: 'RFQ Number',
+            headerName: 'Order Number',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'customer',
-            headerName: 'Customer',
+            field: 'total_amount',
+            headerName: 'Total Amount',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'order_date',
-            headerName: 'Order Date',
+            field: 'payment_date',
+            headerName: 'Payment Date',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'created_by',
-            headerName: 'Created By',
-            minWidth: 100,
-            flex: 1
-        },
-        {
-            field: 'status',
+            field: 'payment_status',
             headerName: 'Status',
             minWidth: 100,
             flex: 1,
             renderCell: (params, row) => {
                 switch (params.value) {
-                    case 'Completed':
+                    case 'Paid':
                         return <Chip label={params.value} color="success" />;
-                    case 'In Progress':
+                    case 'Pending':
                         return <Chip label={params.value} color="warning" />;
                     case 'Draft':
                         return <Chip label={params.value} />;
@@ -68,9 +68,7 @@ export const Purchases = () => {
                 return (
                     <Stack direction="row" spacing={1}>
                         <IconButton
-                            onClick={() =>
-                                navigate(`/purchase-orders/${params.id}`)
-                            }
+                            onClick={() => navigate(`/rfqs/${params.id}`)}
                             aria-label="edit"
                             color="primary"
                         >
@@ -95,18 +93,18 @@ export const Purchases = () => {
                 <Grid item>
                     <Button
                         variant="contained"
-                        onClick={() => navigate('/rfqs/create')}
+                        onClick={() => navigate('/bills/create')}
                         disableElevation
                     >
-                        New Order
+                        New Bill
                     </Button>
                 </Grid>
 
                 <Grid item>
                     <DataGridDemo
-                        rows={allOrders}
+                        rows={allBills}
                         columns={columns}
-                        getRowId={(row) => row.order_number}
+                        getRowId={(row) => row.bill_number}
                     />
                 </Grid>
             </Grid>

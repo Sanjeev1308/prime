@@ -7,7 +7,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { deleteRfqById } from '../../store/slices';
 
-export const Purchases = () => {
+export const Sales = () => {
     const navigate = useNavigate();
     const { allOrders } = useSelector((state) => state.orders);
     const dispatch = useDispatch();

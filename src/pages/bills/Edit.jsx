@@ -20,41 +20,32 @@ import { Formik, Form, FieldArray } from 'formik';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Layout } from '../../layout/Layout';
 import { useSelector, useDispatch } from 'react-redux';
-import { addNewRfq } from '../../store/slices';
-import { useNavigate } from 'react-router-dom';
+import { editRfqById, getRfqById } from '../../store/slices';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
-const initialValues = {
-    rfq_number: '',
-    rfq_date: '',
-    supplier: '',
-    status: '',
-    created_at: '',
-    created_by: '',
-    items: [
-        {
-            product_id: '',
-            product_name: '',
-            description: '',
-            quantity: '',
-            unit_price: ''
-        }
-    ]
-};
-
-export const CreatePurchase = () => {
+export const EditBill = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { id } = useParams();
     const { allProducts } = useSelector((state) => state.products);
+    const { selectedRfq } = useSelector((state) => state.rfqs);
 
+    useEffect(() => {
+        dispatch(getRfqById(id));
+    }, []);
+
+    console.log('kkk', selectedRfq);
     return (
         <Layout>
             <Grid container direction="column" spacing={2}>
                 <Grid item>
                     <Formik
-                        initialValues={initialValues}
+                        enableReinitialize
+                        initialValues={selectedRfq}
                         onSubmit={(values) => {
-                            dispatch(addNewRfq(values));
-                            navigate('/purchases');
+                            dispatch(editRfqById(values));
+                            navigate('/rfqs');
                         }}
                     >
                         {({

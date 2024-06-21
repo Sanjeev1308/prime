@@ -7,9 +7,9 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { deleteRfqById } from '../../store/slices';
 
-export const Purchases = () => {
+export const Transports = () => {
     const navigate = useNavigate();
-    const { allOrders } = useSelector((state) => state.orders);
+    const { allTransports } = useSelector((state) => state.transports);
     const dispatch = useDispatch();
 
     const handleRfqDelete = (id) => {
@@ -19,45 +19,51 @@ export const Purchases = () => {
     const columns = [
         {
             field: 'order_number',
-            headerName: 'RFQ Number',
+            headerName: 'Order Number',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'customer',
-            headerName: 'Customer',
+            field: 'transporter',
+            headerName: 'Transporter',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'order_date',
-            headerName: 'Order Date',
+            field: 'transportation_mode',
+            headerName: 'Transportation Mode',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'created_by',
-            headerName: 'Created By',
+            field: 'vehicle_number',
+            headerName: 'Vehicle Number',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'status',
-            headerName: 'Status',
+            field: 'departure_date',
+            headerName: 'Departure Date',
             minWidth: 100,
-            flex: 1,
-            renderCell: (params, row) => {
-                switch (params.value) {
-                    case 'Completed':
-                        return <Chip label={params.value} color="success" />;
-                    case 'In Progress':
-                        return <Chip label={params.value} color="warning" />;
-                    case 'Draft':
-                        return <Chip label={params.value} />;
-                    default:
-                        return <Chip label={params.value} />;
-                }
-            }
+            flex: 1
+        },
+        {
+            field: 'arrival_date',
+            headerName: 'Arrival Date',
+            minWidth: 100,
+            flex: 1
+        },
+        {
+            field: 'origin_location',
+            headerName: 'Origin Location',
+            minWidth: 100,
+            flex: 1
+        },
+        {
+            field: 'destination_location',
+            headerName: 'Destination Location',
+            minWidth: 100,
+            flex: 1
         },
         {
             field: 'action',
@@ -68,9 +74,7 @@ export const Purchases = () => {
                 return (
                     <Stack direction="row" spacing={1}>
                         <IconButton
-                            onClick={() =>
-                                navigate(`/purchase-orders/${params.id}`)
-                            }
+                            onClick={() => navigate(`/rfqs/${params.id}`)}
                             aria-label="edit"
                             color="primary"
                         >
@@ -98,13 +102,13 @@ export const Purchases = () => {
                         onClick={() => navigate('/rfqs/create')}
                         disableElevation
                     >
-                        New Order
+                        New Transport
                     </Button>
                 </Grid>
 
                 <Grid item>
                     <DataGridDemo
-                        rows={allOrders}
+                        rows={allTransports}
                         columns={columns}
                         getRowId={(row) => row.order_number}
                     />
