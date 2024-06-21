@@ -1,19 +1,19 @@
-import { Layout } from '../../layout/Layout';
-import DataGridDemo from '../../components/table/Table';
+import { Layout } from '../../../layout/Layout';
+import DataGridDemo from '../../../components/table/Table';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { Button, Grid, IconButton, Stack } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { deleteRfqById } from '../../store/slices';
+import { deleteProductsById } from '../../../store/slices';
 
-export const Locations = () => {
+export const Products = () => {
     const navigate = useNavigate();
-    const { allLocations } = useSelector((state) => state.locations);
+    const { allProducts } = useSelector((state) => state.products);
     const dispatch = useDispatch();
 
     const handleRfqDelete = (id) => {
-        dispatch(deleteRfqById(id));
+        dispatch(deleteProductsById(id));
     };
 
     const columns = [
@@ -24,26 +24,20 @@ export const Locations = () => {
             flex: 1
         },
         {
-            field: 'type',
-            headerName: 'Type',
+            field: 'description',
+            headerName: 'Description',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'address',
-            headerName: 'Address',
+            field: 'price',
+            headerName: 'Price',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'contact_person',
-            headerName: 'Contact Person',
-            minWidth: 100,
-            flex: 1
-        },
-        {
-            field: 'contact_number',
-            headerName: 'Contact Number',
+            field: 'unit_of_measure',
+            headerName: 'UOM',
             minWidth: 100,
             flex: 1
         },
@@ -56,7 +50,9 @@ export const Locations = () => {
                 return (
                     <Stack direction="row" spacing={1}>
                         <IconButton
-                            onClick={() => navigate(`/rfqs/${params.id}`)}
+                            onClick={() =>
+                                navigate(`/master/products/${params.id}`)
+                            }
                             aria-label="edit"
                             color="primary"
                         >
@@ -81,16 +77,16 @@ export const Locations = () => {
                 <Grid item>
                     <Button
                         variant="contained"
-                        onClick={() => navigate('/rfqs/create')}
+                        onClick={() => navigate('/master/products/create')}
                         disableElevation
                     >
-                        New Location
+                        New Product
                     </Button>
                 </Grid>
 
                 <Grid item>
                     <DataGridDemo
-                        rows={allLocations}
+                        rows={allProducts}
                         columns={columns}
                         getRowId={(row) => row.id}
                     />

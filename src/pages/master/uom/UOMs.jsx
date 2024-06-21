@@ -1,15 +1,15 @@
-import { Layout } from '../../layout/Layout';
-import DataGridDemo from '../../components/table/Table';
+import { Layout } from '../../../layout/Layout';
+import DataGridDemo from '../../../components/table/Table';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Grid, IconButton, Stack } from '@mui/material';
+import { Button, Grid, IconButton, Stack, Chip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { deleteRfqById } from '../../store/slices';
+import { deleteRfqById } from '../../../store/slices';
 
-export const Locations = () => {
+export const UOMs = () => {
     const navigate = useNavigate();
-    const { allLocations } = useSelector((state) => state.locations);
+    const { allUom } = useSelector((state) => state.uom);
     const dispatch = useDispatch();
 
     const handleRfqDelete = (id) => {
@@ -24,26 +24,8 @@ export const Locations = () => {
             flex: 1
         },
         {
-            field: 'type',
-            headerName: 'Type',
-            minWidth: 100,
-            flex: 1
-        },
-        {
-            field: 'address',
-            headerName: 'Address',
-            minWidth: 100,
-            flex: 1
-        },
-        {
-            field: 'contact_person',
-            headerName: 'Contact Person',
-            minWidth: 100,
-            flex: 1
-        },
-        {
-            field: 'contact_number',
-            headerName: 'Contact Number',
+            field: 'description',
+            headerName: 'Description',
             minWidth: 100,
             flex: 1
         },
@@ -56,7 +38,9 @@ export const Locations = () => {
                 return (
                     <Stack direction="row" spacing={1}>
                         <IconButton
-                            onClick={() => navigate(`/rfqs/${params.id}`)}
+                            onClick={() =>
+                                navigate(`/master/uoms/${params.id}`)
+                            }
                             aria-label="edit"
                             color="primary"
                         >
@@ -81,16 +65,16 @@ export const Locations = () => {
                 <Grid item>
                     <Button
                         variant="contained"
-                        onClick={() => navigate('/rfqs/create')}
+                        onClick={() => navigate('/master/uoms/create')}
                         disableElevation
                     >
-                        New Location
+                        New UOM
                     </Button>
                 </Grid>
 
                 <Grid item>
                     <DataGridDemo
-                        rows={allLocations}
+                        rows={allUom}
                         columns={columns}
                         getRowId={(row) => row.id}
                     />

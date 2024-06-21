@@ -14,42 +14,47 @@ import {
     TableCell,
     TableBody,
     Chip,
-    Stack,
-    Typography
+    Stack
 } from '@mui/material';
 import { Formik, Form, FieldArray } from 'formik';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Layout } from '../../layout/Layout';
 import { useSelector, useDispatch } from 'react-redux';
-import { editRfqById, getRfqById } from '../../store/slices';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { addNewRfq } from '../../store/slices';
+import { useNavigate } from 'react-router-dom';
 
-export const EditRFQ = () => {
+const initialValues = {
+    rfq_number: '',
+    rfq_date: '',
+    supplier: '',
+    status: '',
+    created_at: '',
+    created_by: '',
+    items: [
+        {
+            product_id: '',
+            product_name: '',
+            description: '',
+            quantity: '',
+            unit_price: ''
+        }
+    ]
+};
+
+export const CreatePurchase = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const { id } = useParams();
     const { allProducts } = useSelector((state) => state.products);
-    const { selectedRfq } = useSelector((state) => state.rfqs);
-
-    useEffect(() => {
-        dispatch(getRfqById(id));
-    }, []);
-
-    if (!Object.keys(selectedRfq).length) {
-        return <Typography variant="h4">Loading...</Typography>;
-    }
 
     return (
         <Layout>
             <Grid container direction="column" spacing={2}>
                 <Grid item>
                     <Formik
-                        enableReinitialize
-                        initialValues={selectedRfq}
+                        initialValues={initialValues}
                         onSubmit={(values) => {
-                            dispatch(editRfqById(values));
-                            navigate('/rfqs');
+                            dispatch(addNewRfq(values));
+                            navigate('/purchases');
                         }}
                     >
                         {({

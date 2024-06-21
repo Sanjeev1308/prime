@@ -14,8 +14,7 @@ import {
     TableCell,
     TableBody,
     Chip,
-    Stack,
-    Typography
+    Stack
 } from '@mui/material';
 import { Formik, Form, FieldArray } from 'formik';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -25,7 +24,7 @@ import { editRfqById, getRfqById } from '../../store/slices';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-export const EditRFQ = () => {
+export const EditPurchase = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { id } = useParams();
@@ -36,10 +35,7 @@ export const EditRFQ = () => {
         dispatch(getRfqById(id));
     }, []);
 
-    if (!Object.keys(selectedRfq).length) {
-        return <Typography variant="h4">Loading...</Typography>;
-    }
-
+    console.log('kkk', selectedRfq);
     return (
         <Layout>
             <Grid container direction="column" spacing={2}>

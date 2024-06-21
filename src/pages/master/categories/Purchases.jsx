@@ -2,14 +2,14 @@ import { Layout } from '../../layout/Layout';
 import DataGridDemo from '../../components/table/Table';
 import { useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import { Button, Grid, IconButton, Stack } from '@mui/material';
+import { Button, Grid, IconButton, Stack, Chip } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { deleteRfqById } from '../../store/slices';
 
-export const Locations = () => {
+export const Purchases = () => {
     const navigate = useNavigate();
-    const { allLocations } = useSelector((state) => state.locations);
+    const { allOrders } = useSelector((state) => state.orders);
     const dispatch = useDispatch();
 
     const handleRfqDelete = (id) => {
@@ -18,34 +18,46 @@ export const Locations = () => {
 
     const columns = [
         {
-            field: 'name',
-            headerName: 'Name',
+            field: 'order_number',
+            headerName: 'RFQ Number',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'type',
-            headerName: 'Type',
+            field: 'customer',
+            headerName: 'Customer',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'address',
-            headerName: 'Address',
+            field: 'order_date',
+            headerName: 'Order Date',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'contact_person',
-            headerName: 'Contact Person',
+            field: 'created_by',
+            headerName: 'Created By',
             minWidth: 100,
             flex: 1
         },
         {
-            field: 'contact_number',
-            headerName: 'Contact Number',
+            field: 'status',
+            headerName: 'Status',
             minWidth: 100,
-            flex: 1
+            flex: 1,
+            renderCell: (params, row) => {
+                switch (params.value) {
+                    case 'Completed':
+                        return <Chip label={params.value} color="success" />;
+                    case 'In Progress':
+                        return <Chip label={params.value} color="warning" />;
+                    case 'Draft':
+                        return <Chip label={params.value} />;
+                    default:
+                        return <Chip label={params.value} />;
+                }
+            }
         },
         {
             field: 'action',
@@ -56,7 +68,9 @@ export const Locations = () => {
                 return (
                     <Stack direction="row" spacing={1}>
                         <IconButton
-                            onClick={() => navigate(`/rfqs/${params.id}`)}
+                            onClick={() =>
+                                navigate(`/purchase-orders/${params.id}`)
+                            }
                             aria-label="edit"
                             color="primary"
                         >
@@ -84,15 +98,15 @@ export const Locations = () => {
                         onClick={() => navigate('/rfqs/create')}
                         disableElevation
                     >
-                        New Location
+                        New Order
                     </Button>
                 </Grid>
 
                 <Grid item>
                     <DataGridDemo
-                        rows={allLocations}
+                        rows={allOrders}
                         columns={columns}
-                        getRowId={(row) => row.id}
+                        getRowId={(row) => row.order_number}
                     />
                 </Grid>
             </Grid>

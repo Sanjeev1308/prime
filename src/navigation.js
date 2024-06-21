@@ -15,7 +15,7 @@ export const navigations = [
                 path: '/master/product-sub-cat',
                 roles: []
             },
-            { name: 'UOM', path: '/master/uom', roles: [] }
+            { name: 'UOM', path: '/master/uoms', roles: [] }
         ]
     },
     {
@@ -33,5 +33,6 @@ export const navigations = [
     { name: 'Bills', path: '/bills', roles: [] },
     { name: 'Stocks', path: '/stocks', roles: [] },
     { name: 'Transport', path: '/transports', roles: [] },
+    { name: 'Locations', path: '/locations', roles: [] },
     { name: 'Reports', path: '/reports', roles: [] }
 ];

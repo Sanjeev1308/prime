@@ -20,6 +20,13 @@ import { EditStock } from './pages/stocks/Edit';
 import { Transports } from './pages/transports/Transports';
 import { CreateTransport } from './pages/transports/Create';
 import { EditTransport } from './pages/transports/Edit';
+import { UOMs } from './pages/master/uom/UOMs';
+import { CreateUOM } from './pages/master/uom/Create';
+import { EditUOM } from './pages/master/uom/Edit';
+import { Products } from './pages/master/products/Products';
+import { CreateProduct } from './pages/master/products/Create';
+import { EditProduct } from './pages/master/products/Edit';
+import { Locations } from './pages/locations/Locations';
 
 export const router = createBrowserRouter([
     {
@@ -94,7 +101,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/locations',
-        element: <RFQs />,
+        element: <Locations />,
         errorElement: <ErrorPage />
     },
     {
@@ -135,6 +142,81 @@ export const router = createBrowserRouter([
     {
         path: '/transports/:id',
         element: <EditTransport />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/master/products',
+        element: <Products />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/master/products/create',
+        element: <CreateProduct />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/master/products/:id',
+        element: <EditProduct />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/master/uoms',
+        element: <UOMs />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/master/uoms/create',
+        element: <CreateUOM />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/master/uoms/:id',
+        element: <EditUOM />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/customers',
+        element: <UOMs />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/customers/create',
+        element: <CreateUOM />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/customers/:id',
+        element: <EditUOM />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/vendors',
+        element: <UOMs />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/vendors/create',
+        element: <CreateUOM />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/vendors/:id',
+        element: <EditUOM />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/farmers',
+        element: <UOMs />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/farmers/create',
+        element: <CreateUOM />,
+        errorElement: <ErrorPage />
+    },
+    {
+        path: '/users/farmers/:id',
+        element: <EditUOM />,
         errorElement: <ErrorPage />
     }
 ]);
